@@ -2,7 +2,7 @@
     "name": "epic/genesis-api",
     "minimum-stability": "dev",
     "autoload": {
-        "psr-1": {
+        "psr-0": {
             "Genesis_": "src/"
         }
     },
