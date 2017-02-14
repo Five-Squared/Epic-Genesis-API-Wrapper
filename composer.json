@@ -1,0 +1,14 @@
+{
+    "name": "epic/genesis-api",
+    "minimum-stability": "dev",
+    "autoload": {
+        "psr-1": {
+            "Genesis_": "src/"
+        }
+    },
+    "require": {
+        "php": "^5.4 || ^7.0"
+    },
+    "require-dev": {
+    }
+}
