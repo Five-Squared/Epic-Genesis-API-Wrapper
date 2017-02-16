@@ -4,11 +4,19 @@ class Genesis_Client
     protected $_username;
     
     protected $_password;
+
+    protected $_endpoint;
     
-    public function __construct($username, $password)
+    public function __construct($endpoint, $username, $password)
     {
         $this->_username = $username;
         $this->_password = $password;
+        $this->_endpoint = $endpoint;
+    }
+
+    public function getByPath($path)
+    {
+        return $this->get($this->_endpoint . '/' . $path);
     }
     
     public function get($link)
