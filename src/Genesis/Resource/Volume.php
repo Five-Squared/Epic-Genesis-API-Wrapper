@@ -12,4 +12,14 @@ class Genesis_Resource_Volume extends Genesis_Resource
     {
         return $this->_xml->Entry;
     }
+
+    public function getFirst()
+    {
+        return $this->getEntry(0);
+    }
+
+    public function getEntry($no)
+    {
+        return $this->_xml->Entry[$no];
+    }
 }
