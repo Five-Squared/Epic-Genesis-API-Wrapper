@@ -7,7 +7,7 @@ class Genesis_Client
 
     protected $_endpoint;
     
-    public function __construct($endpoint, $username, $password)
+    public function __construct($username, $password, $endpoint = null)
     {
         $this->_username = $username;
         $this->_password = $password;
@@ -16,6 +16,10 @@ class Genesis_Client
 
     public function getByPath($path)
     {
+        if (!$this->_endpoint) {
+            throw new \Exception('Method not available when endpoint is not configured');
+        }
+
         return $this->get($this->_endpoint . '/' . $path);
     }
     
