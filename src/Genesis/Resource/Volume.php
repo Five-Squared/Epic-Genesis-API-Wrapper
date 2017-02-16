@@ -1,5 +1,5 @@
 <?php
-class Genesis_Resource_Address extends Genesis_Resource
+class Genesis_Resource_Volume extends Genesis_Resource
 {
     protected $_xml;
     
@@ -8,13 +8,8 @@ class Genesis_Resource_Address extends Genesis_Resource
         $this->_xml = $xml;
     }
     
-    public function getKey()
+    public function getEntries()
     {
-        return (string) $this->_xml->Key;
-    }
-    
-    public function getTotal()
-    {
-        return (string) $this->_xml->Total;
+        return $this->_xml->Entry;
     }
 }
