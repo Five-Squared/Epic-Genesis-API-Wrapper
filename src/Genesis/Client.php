@@ -41,7 +41,7 @@ class Genesis_Client
             ->resetParameters(true)
             ->setHeaders('Accept','application/xml')
             ->setAuth($this->_username, $this->_password, Zend_Http_Client::AUTH_BASIC)
-            ->setOptions(array('timeout' => 60));
+            ->setConfig(array('timeout' => 60));
         
         $response = $client->restGet($uri->getPath());
         if (!$response) {
