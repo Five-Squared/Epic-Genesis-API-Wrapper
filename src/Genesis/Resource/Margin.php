@@ -22,9 +22,4 @@ class Genesis_Resource_Margin extends Genesis_Resource
     {
         return $this->_xml->Entry[$no];
     }
-
-    public function getAverage()
-    {
-        return (string) $this->_xml['average'];
-    }
 }
