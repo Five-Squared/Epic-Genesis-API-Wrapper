@@ -82,7 +82,7 @@ class Genesis_Resource_Procurement extends Genesis_Resource
     
     public function getStatus()
     {
-        return (int) $this->_xml->Status;
+        return (string) $this->_xml->Status;
     }
     
     public function getReferenceNo()
