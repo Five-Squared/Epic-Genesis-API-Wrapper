@@ -105,6 +105,16 @@ class Genesis_Resource_Procurement extends Genesis_Resource
         return (string) $this->_xml->TrackingNo;
     }
     
+    public function getBolNo()
+    {
+        return (string) $this->_xml->BolNo;
+    }
+
+    public function getDnuNo()
+    {
+        return (string) $this->_xml->DnuNo;
+    }
+    
     public function getOutstandingBalance()
     {
         return (string) $this->_xml->OutstandingBalance;
