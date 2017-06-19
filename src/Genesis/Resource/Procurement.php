@@ -120,6 +120,16 @@ class Genesis_Resource_Procurement extends Genesis_Resource
         return (string) $this->_xml->OutstandingBalance;
     }
 
+    public function getConfirmedQty()
+    {
+        return (string) $this->_xml->Confirmed->Qty;
+    }
+
+    public function getConfirmedSupplyDate()
+    {
+        return (string) $this->_xml->Confirmed->SupplyDate;
+    }
+
     public function getOrders()
     {
         return $this->_xml->xpath('/Procurement/Orders/Order');
