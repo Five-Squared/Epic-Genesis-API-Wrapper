@@ -2,11 +2,11 @@
 class Genesis_Client
 {
     protected $_username;
-    
+
     protected $_password;
 
     protected $_endpoint;
-    
+
     public function __construct($username, $password, $endpoint = null)
     {
         $this->_username = $username;
@@ -31,15 +31,19 @@ class Genesis_Client
 
         return $this->put($this->_endpoint . '/' . $path, $data);
     }
-    
+
     public function get($link)
     {
         $uri = $this->_getUri($link);
-        
+
         $response = $this->_getClient($uri)->restGet($uri->getPath());
 
-        if (!$response) {
-            throw new Exception('Error fetching from ' . $href);
+        if ($response->isError()) {
+            throw new Exception("Response {$response->getStatus()} received for GET request to {$uri}");
+        }
+
+        if ($response->getBody() == '') {
+            throw new Exception('Response contained empty body for GET request to ' . $uri);
         }
 
         return $this->_getResource($response);
@@ -51,10 +55,10 @@ class Genesis_Client
 
         $response = $this->_getClient($uri)->restPut($uri->getPath(), $data);
 
-        if (!$response) {
-            throw new Exception('Error sending request to ' . $href);
+        if ($response->isError()) {
+            throw new Exception("Response {$response->getStatus()} received for PUT request to {$uri}");
         }
-        
+
         return $this->_getResource($response);
     }
 
@@ -62,15 +66,15 @@ class Genesis_Client
     {
         $xml = simplexml_load_string($response->getBody());
         if (!$xml) {
-            throw new Exception('Failed to load XML from ' . $href);
+            throw new Exception('Failed to load XML from response');
         }
-        
+
         $resource = Genesis_Factory::createResource($xml);
 
         if ($resource instanceof Genesis_Resource_Error) {
             throw new Exception('Error response returned (' . $response->getStatus() . ') with message ' . $response->getBody());
         }
-    
+
         return $resource;
     }
 
@@ -81,7 +85,7 @@ class Genesis_Client
         } else {
             $href = $link;
         }
-        
+
         if (empty($href)) {
             throw new Exception('No href for link ' . $link);
         }
@@ -92,7 +96,7 @@ class Genesis_Client
     protected function _getClient($uri)
     {
         $url = $uri->getScheme() . '://' . $uri->getHost();
-        
+
         $client = new Zend_Rest_Client($url);
 
         $client->getHttpClient()
