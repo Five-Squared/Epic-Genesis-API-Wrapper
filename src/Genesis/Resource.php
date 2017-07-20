@@ -35,6 +35,6 @@ abstract class Genesis_Resource
         }
 
         /* SimpleXML hack to check if element is empty */
-        return count($this->_xml->$property->children()) > 0;
+        return count($this->_xml->$property->children()) == 0;
     }
 }
